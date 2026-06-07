@@ -26,4 +26,17 @@ class Order extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
+
+    public function updateTotalPrice()
+    {
+        $total = 0;
+        
+        // Tambahan ->get() di sini adalah kunci saktinya!
+        // Ini memaksa Laravel mengecek ulang ke database yang paling terbaru.
+        foreach ($this->orderItems()->get() as $item) { 
+            $total += ($item->price * $item->quantity);
+        }
+        
+        $this->updateQuietly(['total_price' => $total]);
+    }
 }
