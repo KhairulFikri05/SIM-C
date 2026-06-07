@@ -9,6 +9,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -97,8 +98,39 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('id')
+                ->label('Order ID')
+                ->sortable()
+                ->searchable(),
+
+            TextColumn::make('table.table_number') // Memanggil relasi nama meja
+                ->label('Meja')
+                ->sortable()
+                ->searchable(),
+
+            TextColumn::make('total_price')
+                ->label('Total Harga')
+                ->money('IDR', locale: 'id') // Otomatis format ke Rupiah (Rp)
+                ->sortable(),
+
+            TextColumn::make('status')
+                ->label('Status Pesanan')
+                ->badge()
+                ->color(fn (string $state): string => match ($state) {
+                    'menunggu' => 'danger',   // Merah: Baru masuk, belum diproses
+                    'dimasak' => 'warning',   // Kuning: Dapur lagi kerja
+                    'disajikan' => 'info',    // Biru: Makanan lagi dianter
+                    'selesai' => 'success',   // Hijau: Udah bayar & selesai
+                    'dibatalkan' => 'gray',   // Abu-abu: Batal
+                    default => 'primary',
+                }),
+
+            TextColumn::make('created_at')
+                ->label('Waktu Pesan')
+                ->dateTime('d M Y, H:i') // Format tanggal dan jam rapi
+                ->sortable(),
             ])
+
             ->filters([
                 //
             ])

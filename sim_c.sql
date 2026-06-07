@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Waktu pembuatan: 22 Sep 2025 pada 16.43
--- Versi server: 10.4.27-MariaDB
--- Versi PHP: 7.4.33
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 07 Jun 2026 pada 16.47
+-- Versi server: 10.4.32-MariaDB
+-- Versi PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `cafe_katumiri`
+-- Database: `sim_c`
 --
 
 -- --------------------------------------------------------
@@ -43,7 +43,7 @@ CREATE TABLE `about_contents` (
 --
 
 INSERT INTO `about_contents` (`id`, `title`, `description`, `chef_quote`, `chef_image`, `establishment_year`, `created_at`, `updated_at`) VALUES
-(1, 'Perjalanan Kuliner Kami', 'Kami membawa pengalaman kuliner terbaik dengan bahan-bahan segar dan koki yang penuh gairah.', 'Memasak adalah seni, dan kami adalah pelukisnya.', 'about/chef-images/01JZ7GWFA43RTDSP5CR0FBZ4T4.png', 2008, '2025-07-02 21:26:02', '2025-08-28 07:34:33');
+(1, 'Perjalanan Kuliner Kami', 'Kami membawa pengalaman kuliner terbaik dengan bahan-bahan segar dan koki yang penuh gairah.', 'Memasak adalah seni, dan kami adalah pelukisnya.', 'https://picsum.photos/400/500?random=1', 2008, '2026-04-15 01:59:11', '2026-04-15 01:59:11');
 
 -- --------------------------------------------------------
 
@@ -66,9 +66,9 @@ CREATE TABLE `about_features` (
 --
 
 INSERT INTO `about_features` (`id`, `icon_class`, `title`, `description`, `order_number`, `created_at`, `updated_at`) VALUES
-(1, 'bi-star', 'Bahan Berkualitas', 'Kami hanya menggunakan bahan-bahan segar dan berkualitas tinggi dalam setiap hidangan.', 0, '2025-07-02 21:26:02', '2025-07-02 21:26:02'),
-(2, 'bi-people', 'Pelayanan Ramah', 'Staf kami siap menyambut Anda dengan senyuman dan pelayanan terbaik.', 0, '2025-07-02 21:26:02', '2025-07-02 21:26:02'),
-(3, 'bi-heart', 'Rasa yang Tak Terlupakan', 'Setiap gigitan dirancang untuk menciptakan kenangan kuliner yang istimewa.', 0, '2025-07-02 21:26:02', '2025-07-02 21:26:02');
+(1, 'bi-star', 'Bahan Berkualitas', 'Kami hanya menggunakan bahan-bahan segar dan berkualitas tinggi dalam setiap hidangan.', 0, '2026-04-15 01:59:11', '2026-04-15 01:59:11'),
+(2, 'bi-people', 'Pelayanan Ramah', 'Staf kami siap menyambut Anda dengan senyuman dan pelayanan terbaik.', 0, '2026-04-15 01:59:11', '2026-04-15 01:59:11'),
+(3, 'bi-heart', 'Rasa yang Tak Terlupakan', 'Setiap gigitan dirancang untuk menciptakan kenangan kuliner yang istimewa.', 0, '2026-04-15 01:59:11', '2026-04-15 01:59:11');
 
 -- --------------------------------------------------------
 
@@ -90,10 +90,10 @@ CREATE TABLE `about_stats` (
 --
 
 INSERT INTO `about_stats` (`id`, `stat_number`, `stat_label`, `order_number`, `created_at`, `updated_at`) VALUES
-(1, '15', 'Tahun Pengalaman', 1, '2025-07-02 21:26:02', '2025-07-02 21:26:02'),
-(2, '2500', 'Pelanggan Puas', 2, '2025-07-02 21:26:02', '2025-07-02 21:26:02'),
-(3, '120', 'Menu Tersedia', 3, '2025-07-02 21:26:02', '2025-07-02 21:26:02'),
-(4, '25', 'Penghargaan', 4, '2025-07-02 21:26:02', '2025-07-02 21:26:02');
+(1, '15', 'Tahun Pengalaman', 1, '2026-04-15 01:59:11', '2026-04-15 01:59:11'),
+(2, '2500', 'Pelanggan Puas', 2, '2026-04-15 01:59:11', '2026-04-15 01:59:11'),
+(3, '120', 'Menu Tersedia', 3, '2026-04-15 01:59:11', '2026-04-15 01:59:11'),
+(4, '25', 'Penghargaan', 4, '2026-04-15 01:59:11', '2026-04-15 01:59:11');
 
 -- --------------------------------------------------------
 
@@ -112,10 +112,10 @@ CREATE TABLE `cache` (
 --
 
 INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('kape_cihanjuang_cache_356a192b7913b04c54574d18c28d46e6395428ab', 'i:1;', 1758548189),
-('kape_cihanjuang_cache_356a192b7913b04c54574d18c28d46e6395428ab:timer', 'i:1758548189;', 1758548189),
-('kape_cihanjuang_cache_livewire-rate-limiter:a17961fa74e9275d529f489537f179c05d50c2f3', 'i:3;', 1758548019),
-('kape_cihanjuang_cache_livewire-rate-limiter:a17961fa74e9275d529f489537f179c05d50c2f3:timer', 'i:1758548019;', 1758548019);
+('sim_c_cache_356a192b7913b04c54574d18c28d46e6395428ab', 'i:1;', 1780842549),
+('sim_c_cache_356a192b7913b04c54574d18c28d46e6395428ab:timer', 'i:1780842549;', 1780842549),
+('sim_c_cache_livewire-rate-limiter:a17961fa74e9275d529f489537f179c05d50c2f3', 'i:1;', 1780840453),
+('sim_c_cache_livewire-rate-limiter:a17961fa74e9275d529f489537f179c05d50c2f3:timer', 'i:1780840453;', 1780840453);
 
 -- --------------------------------------------------------
 
@@ -152,9 +152,9 @@ CREATE TABLE `chefs` (
 --
 
 INSERT INTO `chefs` (`id`, `name`, `role`, `bio`, `image_url`, `awards`, `order_number`, `created_at`, `updated_at`) VALUES
-(1, 'Chef Andi Pratama', 'Executive Chef', 'Dengan pengalaman lebih dari 20 tahun, Chef Andi menghadirkan cita rasa khas yang memikat di setiap hidangan.', 'chefs/01JZ7GPW8YMFDNKKHBPJQQWFH6.png', '[\"Best Asian Cuisine 2018\",\"Gold Medal Culinary Festival 2020\"]', 1, '2025-07-02 21:26:02', '2025-07-02 23:48:43'),
-(2, 'Chef Lestari Widya', 'Pastry Chef', 'Ahli dalam seni membuat dessert dengan tampilan memukau dan rasa yang menggoda.', 'chefs/01JZ7GRP0TTQF4E89QHB3ENDZ0.png', '[\"Top Pastry Innovator 2019\"]', 2, '2025-07-02 21:26:02', '2025-07-02 23:49:42'),
-(3, 'Chef Rio Santoso', 'Sous Chef', 'Chef muda berbakat yang terus mengeksplorasi teknik memasak modern dan tradisional.', 'chefs/01JZ7GSXYD2A7EH6W1Q7QNFQVQ.png', '[]', 3, '2025-07-02 21:26:02', '2025-07-02 23:50:23');
+(1, 'Chef Andi Pratama', 'Executive Chef', 'Dengan pengalaman lebih dari 20 tahun, Chef Andi menghadirkan cita rasa khas yang memikat di setiap hidangan.', 'https://picsum.photos/400/500?random=10', '[\"Best Asian Cuisine 2018\",\"Gold Medal Culinary Festival 2020\"]', 1, '2026-04-15 01:59:12', '2026-04-15 01:59:12'),
+(2, 'Chef Lestari Widya', 'Pastry Chef', 'Ahli dalam seni membuat dessert dengan tampilan memukau dan rasa yang menggoda.', 'https://picsum.photos/400/500?random=11', '[\"Top Pastry Innovator 2019\"]', 2, '2026-04-15 01:59:12', '2026-04-15 01:59:12'),
+(3, 'Chef Rio Santoso', 'Sous Chef', 'Chef muda berbakat yang terus mengeksplorasi teknik memasak modern dan tradisional.', 'https://picsum.photos/400/500?random=12', '[]', 3, '2026-04-15 01:59:12', '2026-04-15 01:59:12');
 
 -- --------------------------------------------------------
 
@@ -178,7 +178,7 @@ CREATE TABLE `contacts` (
 --
 
 INSERT INTO `contacts` (`id`, `email_1`, `email_2`, `phone`, `address`, `office_hours`, `created_at`, `updated_at`) VALUES
-(1, 'info@cafe-katumiri.com', 'support@cafe-katumiri.com', '+62 812 3456 7890', 'Jl. Raya No. 123, Bandung, Indonesia', 'Senin - Jumat: 09.00 - 17.00 WIB', '2025-07-02 21:26:02', '2025-07-02 21:26:02');
+(1, 'info@king-coffee.com', 'support@king-coffee.com', '+62 812 3456 7890', 'Jl. Teuku Umar, Lamtemen Tim., Kec. Jaya Baru, Kota Banda Aceh, Aceh 23232', 'Senin - Jumat: 09.00 - 17.00 WIB', '2026-04-15 01:59:12', '2026-06-03 23:35:16');
 
 -- --------------------------------------------------------
 
@@ -201,9 +201,9 @@ CREATE TABLE `event_types` (
 --
 
 INSERT INTO `event_types` (`id`, `name`, `capacity`, `description`, `icon_class`, `created_at`, `updated_at`) VALUES
-(1, 'Wedding', 100, 'Rayakan hari bahagiamu bersama kami!', 'bi-calendar-event', '2025-07-02 21:26:02', '2025-07-02 21:26:02'),
-(2, 'Corporate', 50, 'Cocok untuk acara bisnis atau gathering perusahaan.', 'bi-briefcase', '2025-07-02 21:26:02', '2025-07-02 21:26:02'),
-(3, 'Birthday Party', 30, 'Buat pesta ulang tahunmu jadi lebih spesial.', 'bi-gift', '2025-07-02 21:26:02', '2025-07-02 21:26:02');
+(1, 'Wedding', 100, 'Rayakan hari bahagiamu bersama kami!', 'bi-calendar-event', '2026-04-15 01:59:12', '2026-04-15 01:59:12'),
+(2, 'Corporate', 50, 'Cocok untuk acara bisnis atau gathering perusahaan.', 'bi-briefcase', '2026-04-15 01:59:12', '2026-04-15 01:59:12'),
+(3, 'Birthday Party', 30, 'Buat pesta ulang tahunmu jadi lebih spesial.', 'bi-gift', '2026-04-15 01:59:12', '2026-04-15 01:59:12');
 
 -- --------------------------------------------------------
 
@@ -244,9 +244,9 @@ CREATE TABLE `featured_events` (
 --
 
 INSERT INTO `featured_events` (`id`, `event_name`, `date`, `time`, `location`, `description`, `image_url`, `created_at`, `updated_at`) VALUES
-(1, 'Live Music Night', '2025-08-15', '19:00', 'Cafe Katumiri Hall', 'Nikmati malam penuh musik dan suasana hangat bersama musisi lokal terbaik.', 'events/01K3REFA3CSB3635D9BWM8RV88.jpg', '2025-07-02 21:26:02', '2025-08-28 06:39:30'),
-(2, 'Cooking Class: Pasta Edition', '2025-08-20', '14:00', 'Dapur Utama Cafe Katumiri', 'Belajar langsung dari chef kami bagaimana membuat pasta autentik Italia.', 'events/01K3REMFYS7K8D5KTW7RYK3SP8.jpg', '2025-07-02 21:26:02', '2025-08-28 06:42:20'),
-(3, 'Family Brunch Special', '2025-08-25', '10:00', 'Teras Taman Cafe Katumiri', 'Ajak keluarga menikmati brunch lezat dengan menu spesial dan suasana hangat.', 'events/01K3RENQMSGQ4T5QQV4TEJ21NC.jpg', '2025-07-02 21:26:02', '2025-08-28 06:43:01');
+(1, 'Live Music Night', '2025-08-15', '19:00', 'Cafe Katumiri Hall', 'Nikmati malam penuh musik dan suasana hangat bersama musisi lokal terbaik.', 'https://picsum.photos/600/400?random=21', '2026-04-15 01:59:12', '2026-04-15 01:59:12'),
+(2, 'Cooking Class: Pasta Edition', '2025-08-20', '14:00', 'Dapur Utama Cafe Katumiri', 'Belajar langsung dari chef kami bagaimana membuat pasta autentik Italia.', 'https://picsum.photos/600/400?random=22', '2026-04-15 01:59:12', '2026-04-15 01:59:12'),
+(3, 'Family Brunch Special', '2025-08-25', '10:00', 'Teras Taman Cafe Katumiri', 'Ajak keluarga menikmati brunch lezat dengan menu spesial dan suasana hangat.', 'https://picsum.photos/600/400?random=23', '2026-04-15 01:59:12', '2026-04-15 01:59:12');
 
 -- --------------------------------------------------------
 
@@ -272,9 +272,9 @@ CREATE TABLE `hero_sliders` (
 --
 
 INSERT INTO `hero_sliders` (`id`, `title`, `description`, `image_url`, `button_text`, `button_link`, `order_number`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 'Selamat Datang di Kape Cihanjuang', 'Nikmati pengalaman kuliner terbaik dengan pemandangan indah dan hidangan lezat.', 'hero-sliders/01K5RT60D080T1HHH8WE19BTE5.jpg', 'Lihat Menu', '#menu', 1, 1, '2025-07-02 21:26:02', '2025-09-22 06:35:32'),
-(2, 'Reservasi Mudah dan Cepat', 'Pesan meja Anda secara online dan rasakan kenyamanan dalam setiap kunjungan.', 'hero-sliders/01JZ7D26ED2J60CXTKSPDBYM8A.jpg', 'Pesan Sekarang', '#reservation', 2, 1, '2025-07-02 21:26:02', '2025-07-02 22:44:59'),
-(3, 'Acara Spesial di Tempat Kami', 'Rayakan momen istimewa bersama keluarga dan sahabat di Cafe Katumiri.', 'hero-sliders/01JZ7D2XXXWTQVQZ7Z68A6BY3J.jpg', 'Lihat Event', '#events', 3, 1, '2025-07-02 21:26:02', '2025-07-02 22:45:23');
+(1, 'Selamat Datang di King Coffee', 'Nikmati pengalaman kuliner terbaik dengan pemandangan indah dan hidangan lezat.', 'hero-sliders/01KP8MX0PZN18VFWYVCGQVEY5R.jpeg', 'Lihat Menu', '#menu', 1, 1, '2026-04-15 01:59:11', '2026-04-15 06:34:08'),
+(2, 'Reservasi Mudah dan Cepat', 'Pesan meja Anda secara online dan rasakan kenyamanan dalam setiap kunjungan.', 'hero-sliders/01KP8N6QQC977E18NG7FQRMV4Y.jpeg', 'Pesan Sekarang', '#reservation', 2, 1, '2026-04-15 01:59:11', '2026-04-15 06:29:25'),
+(3, 'Acara Spesial di Tempat Kami', 'Rayakan momen istimewa bersama keluarga dan sahabat di Cafe Katumiri.', 'hero-sliders/01KPAKG8YGFATJC38GFQXCXF96.jpeg', 'Lihat Event', '#events', 3, 1, '2026-04-15 01:59:11', '2026-04-16 00:36:17');
 
 -- --------------------------------------------------------
 
@@ -332,7 +332,7 @@ CREATE TABLE `locations` (
 --
 
 INSERT INTO `locations` (`id`, `address`, `map_embed`, `hours`, `contact_phone`, `created_at`, `updated_at`) VALUES
-(1, 'Jl. Raya No. 123, Bandung, Indonesia', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.093649236475!2d144.95373531532974!3d-37.81721397975265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577d9b5a40c8c0!2sFederation%20Square!5e0!3m2!1sen!2sid!4v1631069127958!5m2!1sen!2sid\" width=\"100%\" height=\"300\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>', 'Senin - Jumat: 10.00 - 22.00\nSabtu - Minggu: 09.00 - 23.00', '+62 812 3456 7890', '2025-07-02 21:26:02', '2025-07-02 21:26:02');
+(1, 'Jl. Teuku Umar, Lamtemen Tim., Kec. Jaya Baru, Kota Banda Aceh, Aceh 23232', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.174484579993!2d95.30808837311031!3d5.541125233802989!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30403a0f5f3fc80f%3A0x292fcfb97abecbf9!2sJl.%20Teuku%20Umar%2C%20Kota%20Banda%20Aceh%2C%20Aceh!5e0!3m2!1sid!2sid!4v1780554531944!5m2!1sid!2sid\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>', 'Senin - Jumat: 10.00 - 22.00\nSabtu - Minggu: 09.00 - 23.00', '+62 812 3456 7890', '2026-04-15 01:59:12', '2026-06-03 23:29:56');
 
 -- --------------------------------------------------------
 
@@ -353,10 +353,10 @@ CREATE TABLE `menu_categories` (
 --
 
 INSERT INTO `menu_categories` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUES
-(1, 'Starters', 'starters', '2025-07-02 21:26:02', '2025-07-02 21:26:02'),
-(2, 'Main Course', 'main-course', '2025-07-02 21:26:02', '2025-07-02 21:26:02'),
-(3, 'Desserts', 'desserts', '2025-07-02 21:26:02', '2025-07-02 21:26:02'),
-(4, 'Drinks', 'drinks', '2025-07-02 21:26:02', '2025-07-02 21:26:02');
+(1, 'Starters', 'starters', '2026-04-15 01:59:11', '2026-04-15 01:59:11'),
+(2, 'Main Course', 'main-course', '2026-04-15 01:59:11', '2026-04-15 01:59:11'),
+(3, 'Desserts', 'desserts', '2026-04-15 01:59:11', '2026-04-15 01:59:11'),
+(4, 'Drinks', 'drinks', '2026-04-15 01:59:11', '2026-04-15 01:59:11');
 
 -- --------------------------------------------------------
 
@@ -370,6 +370,7 @@ CREATE TABLE `menu_items` (
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `price` decimal(8,2) NOT NULL,
+  `is_available` tinyint(1) NOT NULL DEFAULT 1,
   `image_url` varchar(255) NOT NULL,
   `tags` varchar(255) DEFAULT NULL,
   `is_featured` tinyint(1) NOT NULL DEFAULT 0,
@@ -381,12 +382,12 @@ CREATE TABLE `menu_items` (
 -- Dumping data untuk tabel `menu_items`
 --
 
-INSERT INTO `menu_items` (`id`, `category_id`, `name`, `description`, `price`, `image_url`, `tags`, `is_featured`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Bruschetta', 'Roti panggang dengan topping tomat segar, bawang putih, dan basil.', '35000.00', 'menu-images/01JZ7AV6PHYQR6GE852FEJEG3H.png', 'vegetarian,light', 1, '2025-07-02 21:26:02', '2025-07-02 22:06:13'),
-(2, 2, 'Grilled Chicken Steak', 'Daging ayam panggang disajikan dengan saus lada hitam dan kentang tumbuk.', '75000.00', 'menu-images/01JZ7AVNE7NJGCYKASEGAHDSY0.png', 'chicken,grill', 1, '2025-07-02 21:26:02', '2025-07-02 22:06:28'),
-(3, 3, 'Chocolate Lava Cake', 'Kue coklat hangat dengan lelehan coklat di dalamnya, disajikan dengan es krim.', '45000.00', 'menu-images/01JZ7AVZVSHQY4K9CWBJ9ZRV3R.png', 'sweet,dessert', 0, '2025-07-02 21:26:02', '2025-07-02 22:06:39'),
-(4, 4, 'Iced Matcha Latte', 'Minuman segar dari campuran matcha dan susu, disajikan dingin.', '30000.00', 'menu-images/01JZ7AWP8M08B8H19B1Y2EGSQW.png', 'cold,matcha', 1, '2025-07-02 21:26:02', '2025-07-02 22:07:22'),
-(5, 2, 'Salmon Teriyaki', 'Ikan salmon panggang dengan saus teriyaki spesial, disajikan dengan nasi dan sayur.', '95000.00', 'menu-images/01K3RGYYN14FCP0VHVDM70E6WM.jpg', 'fish,japanese', 1, '2025-07-02 21:26:02', '2025-08-28 07:37:43');
+INSERT INTO `menu_items` (`id`, `category_id`, `name`, `description`, `price`, `is_available`, `image_url`, `tags`, `is_featured`, `created_at`, `updated_at`) VALUES
+(1, 2, 'Sop Buntut', 'Spp buntut yang menyegarkan dengan rempah tradisional', 100000.00, 1, 'menu-images/01KTH6J0EBX2FT0D6XFNR0D2YE.jpg', 'maincourse,light', 1, '2026-04-15 01:59:11', '2026-06-07 07:07:31'),
+(2, 2, 'Grilled Beef Steak', 'Daging sapi panggang disajikan dengan saus lada hitam dan kentang tumbuk.', 125000.00, 1, 'menu-images/01KTH60K5V0W1WC65WCRYJB2D3.jpg', 'beef,grill', 1, '2026-04-15 01:59:11', '2026-06-07 06:58:41'),
+(3, 3, 'Chocolate Lava Cake', 'Kue coklat hangat dengan lelehan coklat di dalamnya, disajikan dengan es krim.', 45000.00, 1, 'menu-images/01KTH6SG1FYPA37HJVJE77MYJQ.jpg', 'sweet,dessert', 0, '2026-04-15 01:59:11', '2026-06-07 07:13:18'),
+(4, 4, 'Iced Matcha Latte', 'Minuman segar dari campuran matcha dan susu, disajikan dingin.', 30000.00, 1, 'menu-images/01KTH74ZFTT2GEGJRVF9AW4TC2.jpg', 'cold,matcha', 0, '2026-04-15 01:59:11', '2026-06-07 07:18:56'),
+(5, 2, 'Salmon Teriyaki', 'Ikan salmon panggang dengan saus teriyaki spesial, disajikan dengan nasi dan sayur.', 95000.00, 1, 'menu-images/01KTH7R0MJ98N1N268XBME8FYF.jpg', 'fish,japanese', 1, '2026-04-15 01:59:11', '2026-06-07 07:28:16');
 
 -- --------------------------------------------------------
 
@@ -420,7 +421,57 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (13, '2025_07_01_042307_create_reservations_table', 1),
 (14, '2025_07_01_042308_create_contacts_table', 1),
 (15, '2025_07_01_042308_create_event_types_table', 1),
-(16, '2025_07_01_042308_create_featured_events_table', 1);
+(16, '2025_07_01_042308_create_featured_events_table', 1),
+(17, '2026_06_04_052107_create_tables_table', 2),
+(18, '2026_06_04_053637_add_table_id_to_reservations_table', 3),
+(19, '2026_06_04_061350_add_is_available_to_menu_items_table', 4),
+(20, '2026_06_04_074016_create_orders_table', 5),
+(21, '2026_06_04_074025_create_order_items_table', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `table_id` bigint(20) UNSIGNED NOT NULL,
+  `total_price` int(11) NOT NULL DEFAULT 0,
+  `status` enum('menunggu','dimasak','disajikan','selesai','dibatalkan') NOT NULL DEFAULT 'menunggu',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `orders`
+--
+
+INSERT INTO `orders` (`id`, `table_id`, `total_price`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 0, 'menunggu', '2026-06-07 07:15:14', '2026-06-07 07:15:14');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `order_items`
+--
+
+CREATE TABLE `order_items` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `order_id` bigint(20) UNSIGNED NOT NULL,
+  `menu_item_id` bigint(20) UNSIGNED NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `price` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `order_items`
+--
+
+INSERT INTO `order_items` (`id`, `order_id`, `menu_item_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES
+(1, 1, 2, 1, 125000, '2026-06-07 07:15:14', '2026-06-07 07:15:14');
 
 -- --------------------------------------------------------
 
@@ -451,22 +502,18 @@ CREATE TABLE `reservations` (
   `message` text DEFAULT NULL,
   `status` varchar(255) NOT NULL DEFAULT 'Pending',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `table_id` bigint(20) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data untuk tabel `reservations`
 --
 
-INSERT INTO `reservations` (`id`, `name`, `email`, `phone`, `people`, `date`, `time`, `message`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Andi Pratama', 'andi@example.com', '+62 812 1111 1111', 2, '2025-07-10', '18:30:00', 'Meja dekat jendela jika memungkinkan.', 'Pending', '2025-07-02 21:26:02', '2025-07-02 21:26:02'),
-(2, 'Siti Lestari', 'siti@example.com', '+62 812 2222 2222', 4, '2025-07-11', '19:00:00', '', 'Pending', '2025-07-02 21:26:02', '2025-07-02 21:26:02'),
-(3, 'Rio Santoso', 'rio@example.com', '+62 812 3333 3333', 3, '2025-07-12', '20:00:00', 'Rayakan ulang tahun istri saya.', 'Pending', '2025-07-02 21:26:02', '2025-07-02 21:26:02'),
-(4, 'Dewi Kusuma', 'dewi@example.com', '+62 812 4444 4444', 5, '2025-07-13', '17:00:00', '', 'Pending', '2025-07-02 21:26:02', '2025-07-02 21:26:02'),
-(5, 'Bayu Nugraha', 'bayu@example.com', '+62 812 5555 5555', 6, '2025-07-14', '19:30:00', 'Mohon siapkan kursi bayi.', 'Pending', '2025-07-02 21:26:02', '2025-07-02 21:26:02'),
-(6, 'asep', 'dsad@gmail.com', '09786876575', 5, '2025-08-29', '01:42:00', 'dsadsadsa', 'Confirmed', '2025-08-28 06:37:51', '2025-08-28 06:38:11'),
-(7, 'Eka', 'eka@gmail.com', '098765678765', 3, '2025-08-29', '23:20:00', 'pesan kursi no smoking area', 'Confirmed', '2025-08-28 07:20:54', '2025-08-28 07:21:21'),
-(8, 'Pratama', 'mail@mail.com', '0897984328743', 2, '2025-08-28', '21:39:00', 'area smoking', 'Confirmed', '2025-08-28 07:40:05', '2025-08-28 07:40:26');
+INSERT INTO `reservations` (`id`, `name`, `email`, `phone`, `people`, `date`, `time`, `message`, `status`, `created_at`, `updated_at`, `table_id`) VALUES
+(4, 'Dewi Kusuma', 'dewi@example.com', '+62 812 4444 4444', 5, '2025-07-13', '17:00:00', NULL, 'Pending', '2026-04-15 01:59:12', '2026-06-03 23:12:29', 2),
+(5, 'Bayu Nugraha', 'bayu@example.com', '+62 812 5555 5555', 6, '2025-07-14', '19:30:00', 'Mohon siapkan kursi bayi.', 'Pending', '2026-04-15 01:59:12', '2026-04-15 01:59:12', NULL),
+(6, 'didin', 'didin@gmail.com', '082368798699', 6, '2026-04-24', '00:34:00', 'utdfyiguihyuoip[op]', 'Cancelled', '2026-04-15 06:31:08', '2026-04-15 06:32:43', NULL);
 
 -- --------------------------------------------------------
 
@@ -488,7 +535,30 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('AiwpYfrQg3T9uMAuW99Dx0zCdRS8fVMkgu3wRNHa', NULL, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoidUF3dDVQb2dsNVZ5SElSYnNPWWRTQmoxSUlCU3B6czlpYlpZelk1RSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6MzoidXJsIjthOjE6e3M6ODoiaW50ZW5kZWQiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbiI7fX0=', 1758550276);
+('caDqXmtlheDJbQjZAqhajK1Hbxemt1yyI9x2y4k4', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoib01KaGZtd01iMm1PTzZqTHhjOWJrYXQ3Qm5FV1NISHE4bjlwZjBFMyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9tZW51LWl0ZW1zLzUvZWRpdCI7czo1OiJyb3V0ZSI7czo0MDoiZmlsYW1lbnQuYWRtaW4ucmVzb3VyY2VzLm1lbnUtaXRlbXMuZWRpdCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MzoidXJsIjthOjA6e31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjY0OiI4ZmMxZGNkMzRkOTY2NjhhMTY5ODkzMWU3MjZjNGJjOWI5Zjg2YTFiNGQ2MDFkYTQ3YjM4ZjljNmJkNGU3YzdhIjtzOjg6ImZpbGFtZW50IjthOjA6e319', 1780843541);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tables`
+--
+
+CREATE TABLE `tables` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `table_number` varchar(255) NOT NULL,
+  `capacity` int(11) NOT NULL,
+  `status` enum('kosong','reservasi','digunakan') NOT NULL DEFAULT 'kosong',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `tables`
+--
+
+INSERT INTO `tables` (`id`, `table_number`, `capacity`, `status`, `created_at`, `updated_at`) VALUES
+(1, '1', 10, 'kosong', '2026-06-03 22:35:30', '2026-06-03 23:09:08'),
+(2, '2', 5, 'reservasi', '2026-06-03 23:11:39', '2026-06-03 23:12:29');
 
 -- --------------------------------------------------------
 
@@ -512,9 +582,11 @@ CREATE TABLE `testimonials` (
 --
 
 INSERT INTO `testimonials` (`id`, `name`, `role`, `message`, `rating`, `image_url`, `created_at`, `updated_at`) VALUES
-(1, 'Andi Pratama', 'Pengusaha', 'Tempat yang luar biasa! Makanannya enak dan pelayanannya sangat ramah. Pasti akan kembali lagi!', 5, 'testimonials/01K3RESFJPBW1C73M7H1XWYXD9.png', '2025-07-02 21:26:02', '2025-08-28 06:45:03'),
-(2, 'Siti Lestari', 'Desainer Interior', 'Suasana restorannya sangat nyaman. Cocok banget buat dinner romantis.', 4, 'testimonials/01K3RF0QJJE0H2B4SFE162ZYVN.png', '2025-07-02 21:26:02', '2025-08-28 06:49:01'),
-(3, 'Bayu Nugraha', 'Dosen', 'Saya suka konsep dan presentasi makanannya. Sangat elegan!', 5, 'testimonials/01K3RF2NCQ44P7Y29VZDSMX5KW.png', '2025-07-02 21:26:02', '2025-08-28 06:50:04');
+(1, 'Andi Pratama', 'Pengusaha', 'Tempat yang luar biasa! Makanannya enak dan pelayanannya sangat ramah. Pasti akan kembali lagi!', 5, 'https://picsum.photos/100/100?random=1', '2026-04-15 01:59:11', '2026-04-15 01:59:11'),
+(2, 'Siti Lestari', 'Desainer Interior', 'Suasana restorannya sangat nyaman. Cocok banget buat dinner romantis.', 4, 'https://picsum.photos/100/100?random=2', '2026-04-15 01:59:12', '2026-04-15 01:59:12'),
+(3, 'Bayu Nugraha', 'Dosen', 'Saya suka konsep dan presentasi makanannya. Sangat elegan!', 5, 'https://picsum.photos/100/100?random=3', '2026-04-15 01:59:12', '2026-04-15 01:59:12'),
+(4, 'Dewi Kusuma', 'Ibu Rumah Tangga', 'Anak-anak saya sangat suka dessert di sini. Pasti akan sering mampir!', 4, 'https://picsum.photos/100/100?random=4', '2026-04-15 01:59:12', '2026-04-15 01:59:12'),
+(5, 'Rian Kurniawan', 'Musisi', 'Live music dan makanannya bikin malam saya sempurna. Recommended banget!', 5, 'https://picsum.photos/100/100?random=5', '2026-04-15 01:59:12', '2026-04-15 01:59:12');
 
 -- --------------------------------------------------------
 
@@ -538,7 +610,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin Kape Cihanjuang', 'admin@example.com', '2025-07-02 21:26:01', '$2y$12$DpkMJ0bFrC8AfdXaXjl5geruApFm2uJt/PcOdInm3rEGrRjE.5M5u', 'aeum69E5Lc9yWFR7kXIKNx9FSQVnvD3nVc9jB8WxaXepvZLBRcznNFcRmIyY', '2025-07-02 21:26:02', '2025-07-02 21:26:02');
+(1, 'Admin King Coffee', 'admin@example.com', '2026-04-15 01:59:11', '$2y$12$ZLMip6aEY2NdrsLf80CEBO5mLaSp2LpZ/N607XHr4CPSZ9lrCw4sG', 'HIkELG1cNRoI1oLmmVNlL5kiA38vY2jBcQGHRb5V0FPvkSYbAPqOUTxa19W3', '2026-04-15 01:59:11', '2026-04-15 01:59:11');
 
 --
 -- Indexes for dumped tables
@@ -651,6 +723,21 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `orders_table_id_foreign` (`table_id`);
+
+--
+-- Indeks untuk tabel `order_items`
+--
+ALTER TABLE `order_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_items_order_id_foreign` (`order_id`),
+  ADD KEY `order_items_menu_item_id_foreign` (`menu_item_id`);
+
+--
 -- Indeks untuk tabel `password_reset_tokens`
 --
 ALTER TABLE `password_reset_tokens`
@@ -660,7 +747,8 @@ ALTER TABLE `password_reset_tokens`
 -- Indeks untuk tabel `reservations`
 --
 ALTER TABLE `reservations`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `reservations_table_id_foreign` (`table_id`);
 
 --
 -- Indeks untuk tabel `sessions`
@@ -669,6 +757,13 @@ ALTER TABLE `sessions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `sessions_user_id_index` (`user_id`),
   ADD KEY `sessions_last_activity_index` (`last_activity`);
+
+--
+-- Indeks untuk tabel `tables`
+--
+ALTER TABLE `tables`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `tables_table_number_unique` (`table_number`);
 
 --
 -- Indeks untuk tabel `testimonials`
@@ -769,13 +864,31 @@ ALTER TABLE `menu_items`
 -- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT untuk tabel `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `order_items`
+--
+ALTER TABLE `order_items`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT untuk tabel `tables`
+--
+ALTER TABLE `tables`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `testimonials`
@@ -787,7 +900,7 @@ ALTER TABLE `testimonials`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -798,7 +911,30 @@ ALTER TABLE `users`
 --
 ALTER TABLE `menu_items`
   ADD CONSTRAINT `menu_items_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `menu_categories` (`id`) ON DELETE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_table_id_foreign` FOREIGN KEY (`table_id`) REFERENCES `tables` (`id`) ON DELETE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `order_items`
+--
+ALTER TABLE `order_items`
+  ADD CONSTRAINT `order_items_menu_item_id_foreign` FOREIGN KEY (`menu_item_id`) REFERENCES `menu_items` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `order_items_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `reservations`
+--
+ALTER TABLE `reservations`
+  ADD CONSTRAINT `reservations_table_id_foreign` FOREIGN KEY (`table_id`) REFERENCES `tables` (`id`) ON DELETE SET NULL;
 COMMIT;
+
+ALTER TABLE `orders`
+ADD `payment_status` ENUM('unpaid', 'paid', 'failed') NOT NULL DEFAULT 'unpaid' AFTER `status`,
+ADD `snap_token` VARCHAR(255) NULL AFTER `payment_status`;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

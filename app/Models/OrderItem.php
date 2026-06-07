@@ -27,4 +27,19 @@ class OrderItem extends Model
     {
         return $this->belongsTo(MenuItem::class);
     }
+
+    protected static function booted()
+    {
+        // Trigger saat menu ditambahkan / diubah
+        static::saved(function ($orderItem) {
+            $order = \App\Models\Order::find($orderItem->order_id);
+            $order?->updateTotalPrice();
+        });
+
+        // Trigger saat menu dihapus
+        static::deleted(function ($orderItem) {
+            $order = \App\Models\Order::find($orderItem->order_id);
+            $order?->updateTotalPrice();
+        });
+    }
 }
