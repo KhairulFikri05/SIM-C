@@ -932,6 +932,10 @@ ALTER TABLE `reservations`
   ADD CONSTRAINT `reservations_table_id_foreign` FOREIGN KEY (`table_id`) REFERENCES `tables` (`id`) ON DELETE SET NULL;
 COMMIT;
 
+ALTER TABLE `orders`
+ADD `payment_status` ENUM('unpaid', 'paid', 'failed') NOT NULL DEFAULT 'unpaid' AFTER `status`,
+ADD `snap_token` VARCHAR(255) NULL AFTER `payment_status`;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
