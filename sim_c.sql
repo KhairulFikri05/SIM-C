@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 07 Jun 2026 pada 16.47
+-- Waktu pembuatan: 07 Jun 2026 pada 19.19
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -106,16 +106,6 @@ CREATE TABLE `cache` (
   `value` mediumtext NOT NULL,
   `expiration` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data untuk tabel `cache`
---
-
-INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('sim_c_cache_356a192b7913b04c54574d18c28d46e6395428ab', 'i:1;', 1780842549),
-('sim_c_cache_356a192b7913b04c54574d18c28d46e6395428ab:timer', 'i:1780842549;', 1780842549),
-('sim_c_cache_livewire-rate-limiter:a17961fa74e9275d529f489537f179c05d50c2f3', 'i:1;', 1780840453),
-('sim_c_cache_livewire-rate-limiter:a17961fa74e9275d529f489537f179c05d50c2f3:timer', 'i:1780840453;', 1780840453);
 
 -- --------------------------------------------------------
 
@@ -426,7 +416,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (18, '2026_06_04_053637_add_table_id_to_reservations_table', 3),
 (19, '2026_06_04_061350_add_is_available_to_menu_items_table', 4),
 (20, '2026_06_04_074016_create_orders_table', 5),
-(21, '2026_06_04_074025_create_order_items_table', 5);
+(21, '2026_06_04_074025_create_order_items_table', 5),
+(22, '2026_06_07_150730_add_payment_columns_to_orders_table', 6);
 
 -- --------------------------------------------------------
 
@@ -439,6 +430,8 @@ CREATE TABLE `orders` (
   `table_id` bigint(20) UNSIGNED NOT NULL,
   `total_price` int(11) NOT NULL DEFAULT 0,
   `status` enum('menunggu','dimasak','disajikan','selesai','dibatalkan') NOT NULL DEFAULT 'menunggu',
+  `payment_status` enum('unpaid','paid','failed') NOT NULL DEFAULT 'unpaid',
+  `snap_token` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -447,8 +440,9 @@ CREATE TABLE `orders` (
 -- Dumping data untuk tabel `orders`
 --
 
-INSERT INTO `orders` (`id`, `table_id`, `total_price`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 0, 'menunggu', '2026-06-07 07:15:14', '2026-06-07 07:15:14');
+INSERT INTO `orders` (`id`, `table_id`, `total_price`, `status`, `payment_status`, `snap_token`, `created_at`, `updated_at`) VALUES
+(2, 1, 250000, 'dimasak', 'unpaid', 'c65458f7-e797-4e31-a632-696743ff174e', '2026-06-07 09:18:01', '2026-06-07 09:27:08'),
+(3, 2, 30000, 'dimasak', 'unpaid', '46e6a13a-13c5-472c-8f5f-b20e590b6772', '2026-06-07 09:36:10', '2026-06-07 09:38:33');
 
 -- --------------------------------------------------------
 
@@ -471,7 +465,8 @@ CREATE TABLE `order_items` (
 --
 
 INSERT INTO `order_items` (`id`, `order_id`, `menu_item_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES
-(1, 1, 2, 1, 125000, '2026-06-07 07:15:14', '2026-06-07 07:15:14');
+(2, 2, 2, 2, 125000, '2026-06-07 09:18:01', '2026-06-07 09:18:48'),
+(3, 3, 4, 1, 30000, '2026-06-07 09:36:10', '2026-06-07 09:36:10');
 
 -- --------------------------------------------------------
 
@@ -535,7 +530,11 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('caDqXmtlheDJbQjZAqhajK1Hbxemt1yyI9x2y4k4', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoib01KaGZtd01iMm1PTzZqTHhjOWJrYXQ3Qm5FV1NISHE4bjlwZjBFMyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9tZW51LWl0ZW1zLzUvZWRpdCI7czo1OiJyb3V0ZSI7czo0MDoiZmlsYW1lbnQuYWRtaW4ucmVzb3VyY2VzLm1lbnUtaXRlbXMuZWRpdCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MzoidXJsIjthOjA6e31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjY0OiI4ZmMxZGNkMzRkOTY2NjhhMTY5ODkzMWU3MjZjNGJjOWI5Zjg2YTFiNGQ2MDFkYTQ3YjM4ZjljNmJkNGU3YzdhIjtzOjg6ImZpbGFtZW50IjthOjA6e319', 1780843541);
+('caDqXmtlheDJbQjZAqhajK1Hbxemt1yyI9x2y4k4', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36', 'YTo4OntzOjY6Il90b2tlbiI7czo0MDoib01KaGZtd01iMm1PTzZqTHhjOWJrYXQ3Qm5FV1NISHE4bjlwZjBFMyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czozOiJ1cmwiO2E6MDp7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjQ6IjhmYzFkY2QzNGQ5NjY2OGExNjk4OTMxZTcyNmM0YmM5YjlmODZhMWI0ZDYwMWRhNDdiMzhmOWM2YmQ0ZTdjN2EiO3M6ODoiZmlsYW1lbnQiO2E6MDp7fXM6NDoiY2FydCI7YToxOntpOjE7YTozOntzOjQ6Im5hbWUiO3M6MTA6IlNvcCBCdW50dXQiO3M6ODoicXVhbnRpdHkiO2k6NDtzOjU6InByaWNlIjtzOjk6IjEwMDAwMC4wMCI7fX19', 1780852709),
+('DJpEreh3j4ZdhDRo2T4rBep1Sb8tcbcL29eNN8CH', NULL, '127.0.0.1', 'ReactorNetty/1.1.14', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiR2ZDdXBRcFdBc25FamQ4UUlzVTNWcGEydUhmV2NndllEWTZKY01GTCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1780850301),
+('olkM6ss0JDcoPMLxlO3zV89wj6rkthrTAHxGkikz', NULL, '127.0.0.1', 'Veritrans', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoib1lqNVhJTmpIYkVJRVJCTjlObExpbldjelh4MUlNNlY1aVFHTUd2aCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1780849259),
+('p57vq844va8mh0LEUrxTKjL5nepemDZIOJ1s228Z', NULL, '127.0.0.1', 'ReactorNetty/1.1.14', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiaXFTWnVKRWtqQXJqRUhNdXhGZFI0T3I5d0Vjam9UMHhRMlVtUkFaQiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1780850313),
+('tWvdIII4CrsmSyQ6HvYNqWN8B9l3zavCn16ELqn0', NULL, '127.0.0.1', 'Veritrans', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoick5BMVdITkV4ZUxKOGJpeFh2bUk3TDBlbGZocGVublFoSWtQNE40TSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1780849175);
 
 -- --------------------------------------------------------
 
@@ -864,19 +863,19 @@ ALTER TABLE `menu_items`
 -- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT untuk tabel `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `reservations`

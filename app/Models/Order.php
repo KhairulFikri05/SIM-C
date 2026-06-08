@@ -13,6 +13,7 @@ class Order extends Model
         'table_id',
         'total_price',
         'status',
+        'payment_status',
     ];
 
     // Relasi ke Meja (Satu pesanan punya satu meja)

@@ -40,6 +40,82 @@
 
     @include('partials.footer')
 
+<button class="btn position-fixed shadow-lg d-flex align-items-center justify-content-center" 
+        type="button" 
+        data-bs-toggle="offcanvas" 
+        data-bs-target="#cartOffcanvas" 
+        aria-controls="cartOffcanvas"
+        style="bottom: 90px; right: 30px; width: 65px; height: 65px; border-radius: 50%; z-index: 999999; background-color: #a0845a; border: 2px solid #222;">
+    <span style="font-size: 26px;">🛒</span>
+    
+    @php $cartCount = count(session('cart', [])); @endphp
+    @if($cartCount > 0)
+        <span class="badge bg-danger rounded-pill position-absolute shadow" style="top: 0; right: 0; font-size: 13px;">
+            {{ $cartCount }}
+        </span>
+    @endif
+</button>
+
+<div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel" style="z-index: 9999999; border-left: 1px solid #333;">
+    <div class="offcanvas-header border-bottom border-secondary">
+        <h5 id="cartOffcanvasLabel" style="color: #d4af37; margin-bottom: 0;">🛒 Keranjang Pesanan</h5>
+        <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    
+    <div class="offcanvas-body d-flex flex-column">
+        @php
+            $cart = session('cart', []);
+            $total = 0;
+        @endphp
+
+        @if(count($cart) > 0)
+            <div class="cart-items flex-grow-1 overflow-auto pe-2">
+                @foreach($cart as $id => $details)
+                    @php $total += $details['price'] * $details['quantity']; @endphp
+                    <div class="d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom border-secondary">
+                        <div>
+                            <h6 class="mb-1 fw-bold">{{ $details['name'] }}</h6>
+                            <small class="text-secondary">{{ $details['quantity'] }}x @ Rp{{ number_format($details['price'], 0, ',', '.') }}</small>
+                        </div>
+                        <div class="fw-bold" style="color: #d4af37;">
+                            Rp{{ number_format($details['price'] * $details['quantity'], 0, ',', '.') }}
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            <div class="cart-checkout-section mt-3 pt-3 border-top border-secondary">
+                <div class="d-flex justify-content-between mb-3">
+                    <h5 class="fw-bold m-0">Total Tagihan</h5>
+                    <h5 class="fw-bold m-0" style="color: #d4af37;">Rp{{ number_format($total, 0, ',', '.') }}</h5>
+                </div>
+
+                <form action="{{ route('cart.checkout') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label class="form-label text-light">Pilih Nomor Meja</label>
+                        <select name="table_id" class="form-select bg-dark text-light border-secondary" required>
+                            <option value="">-- Silakan Pilih --</option>
+                            <option value="1">Meja 1</option>
+                            <option value="2">Meja 2</option>
+                            <option value="3">Meja 3</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn w-100 fw-bold py-2" style="background-color: #d4af37; color: #ffffff;">
+                        Lanjut Pembayaran 💳
+                    </button>
+                </form>
+            </div>
+        @else
+            <div class="text-center mt-5">
+                <div style="font-size: 50px; opacity: 0.5;">☕</div>
+                <h5 class="mt-3 text-secondary">Keranjang masih kosong.</h5>
+                <p class="text-secondary mb-4">Yuk, pilih menu favoritmu!</p>
+                <button type="button" class="btn btn-outline-warning w-100" data-bs-dismiss="offcanvas">Lihat Menu</button>
+            </div>
+        @endif
+    </div>
+</div>
 
 </body>
 

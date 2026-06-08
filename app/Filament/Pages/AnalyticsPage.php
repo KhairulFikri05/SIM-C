@@ -33,30 +33,65 @@ class AnalyticsPage extends Page
     public function updatedPeriod(): void
     {
         $this->loadChartData();
+        // Memaksa komponen chart di frontend agar memperbarui grafiknya saat di-klik
+        $this->dispatch('periodUpdated');
     }
 
     public function loadChartData(): void
     {
         $revenueChart = $this->getRevenueChart();
 
-        $this->revenueChartLabels = $revenueChart->pluck('label')->map(function ($l) {
-            // Jika period hari ini → format jam "08:00"
-            if ($this->period === 'today') {
-                return str_pad((string) $l, 2, '0', STR_PAD_LEFT) . ':00';
-            }
-            // Jika week/month → format tanggal "01 Jun"
-            return \Carbon\Carbon::parse($l)->translatedFormat('d M');
-        })->values()->toArray();
+        $labels = [];
+        $data   = [];
 
-        $this->revenueChartData = $revenueChart->pluck('total')->values()->toArray();
+        if ($this->period === 'today') {
+            $chartDict = $revenueChart->pluck('total', 'label')->toArray();
+            $keys = array_map('intval', array_keys($chartDict));
+            $currentHour = (int) now()->format('H');
+            $startHour = min($keys ?: [8]);
+            $startHour = max(0, $startHour - 1); // Tambahkan padding 1 jam sebelumnya
+
+            for ($i = $startHour; $i <= $currentHour; $i++) {
+                $labels[] = str_pad((string) $i, 2, '0', STR_PAD_LEFT) . ':00';
+                $val      = $chartDict[$i] ?? $chartDict[(string)$i] ?? $chartDict[str_pad((string)$i, 2, '0', STR_PAD_LEFT)] ?? 0;
+                $data[]   = (float) $val;
+            }
+        } else {
+            $days = $this->period === 'week' ? 6 : 29;
+            $chartDict = $revenueChart->pluck('total', 'label')->toArray();
+
+            for ($i = $days; $i >= 0; $i--) {
+                $date = now()->subDays($i);
+                $dateString = $date->format('Y-m-d');
+                $labels[] = $date->translatedFormat('d M');
+                $val      = $chartDict[$dateString] ?? 0;
+                $data[]   = (float) $val;
+            }
+        }
+
+        $this->revenueChartLabels = $labels;
+        $this->revenueChartData   = $data;
 
         $busiestHours = $this->getBusiestHours();
+        $busiestHoursDict = $busiestHours->pluck('total_orders', 'hour')->toArray();
 
-        $this->busiestHoursLabels = $busiestHours->pluck('hour')->map(function ($h) {
-            return str_pad((string) $h, 2, '0', STR_PAD_LEFT) . ':00';
-        })->values()->toArray();
+        $bHoursLabels = [];
+        $bHoursData   = [];
 
-        $this->busiestHoursData = $busiestHours->pluck('total_orders')->values()->toArray();
+        $bKeys = array_map('intval', array_keys($busiestHoursDict));
+        $minHour = min($bKeys ?: [8]);
+        $maxHour = max($bKeys ?: [22]);
+        $minHour = max(0, $minHour - 1);
+        $maxHour = min(23, $maxHour + 1);
+
+        for ($i = $minHour; $i <= $maxHour; $i++) {
+            $bHoursLabels[] = str_pad((string) $i, 2, '0', STR_PAD_LEFT) . ':00';
+            $val            = $busiestHoursDict[$i] ?? $busiestHoursDict[(string)$i] ?? $busiestHoursDict[str_pad((string)$i, 2, '0', STR_PAD_LEFT)] ?? 0;
+            $bHoursData[]   = (int) $val;
+        }
+
+        $this->busiestHoursLabels = $bHoursLabels;
+        $this->busiestHoursData   = $bHoursData;
     }
 
     public function getPeriodOptions(): array
@@ -71,8 +106,8 @@ class AnalyticsPage extends Page
     public function getStartDate(): \Carbon\Carbon
     {
         return match ($this->period) {
-            'week'  => now()->subDays(7),
-            'month' => now()->subDays(30),
+            'week'  => now()->subDays(6)->startOfDay(),
+            'month' => now()->subDays(29)->startOfDay(),
             default => now()->startOfDay(),
         };
     }
@@ -93,9 +128,9 @@ class AnalyticsPage extends Page
         $avg   = $count > 0 ? $total / $count : 0;
 
         return [
-            'total'   => $total,
+            'total'   => (float) $total,
             'count'   => $count,
-            'average' => $avg,
+            'average' => (float) $avg,
         ];
     }
 

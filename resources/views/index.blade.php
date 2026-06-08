@@ -71,7 +71,7 @@
                                     <img src="{{ asset('storage/' . $hero->image_url) }}" alt="Hero Slide {{ $hero->title }}">
                                 @endif
                                 <div class="caption-box" style="position: absolute; bottom: 30px; left: 30px; background: rgba(0,0,0,0.7); padding: 15px; border-radius: 8px; color: white;">
-                                    <h4 style="margin: 0; color: #d4af37;">{{ $hero->title }}</h4>
+                                    <h4 style="margin: 0; color: #a0845a;">{{ $hero->title }}</h4>
                                 </div>
                             </div>
                         </div>
@@ -217,6 +217,16 @@
                                     Rp{{ number_format($item->price, 0, ',', '.') }}
                                 @endif
                             </div>
+
+                            @if ($item->is_available)
+                                <button type="button" class="btn btn-sm w-100 mt-2 fw-bold" data-bs-toggle="modal" data-bs-target="#modalCart-{{ Str::slug($category->name) }}-{{ $item->id }}" style="background-color: #a0845a; color: #ffffff;; border: none; padding: 8px;">
+                                    + Tambah ke Keranjang
+                                </button>
+                            @else
+                                <button class="btn btn-sm w-100 mt-2 fw-bold" style="background-color: #444; color: #999; border: none; padding: 8px; cursor: not-allowed;" disabled>
+                                    Sold Out
+                                </button>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -240,7 +250,7 @@
                 <div class="row g-4">
                     @forelse ($featuredItems as $item)
                     <div class="col-md-6">
-                        <div class="menu-item special-item">
+                        <div class="menu-item special-item" >
                             <div class="menu-item-img">
                                 <img src="{{ asset('storage/' . $item->image_url) }}" alt="{{ $item->name }}" class="img-fluid">
                                 <div class="menu-item-badges">
@@ -258,6 +268,16 @@
                                 <div class="menu-item-price">
                                     Rp{{ number_format($item->price, 0, ',', '.') }}
                                 </div>
+
+                                @if ($item->is_available)
+                                    <button type="button" class="btn btn-sm w-100 mt-3 fw-bold" data-bs-toggle="modal" data-bs-target="#modalCart-special-{{ $item->id }}" style="background-color: #a0845a; color: #ffffff; border: none; padding: 8px;">
+                                        + Tambah ke Keranjang
+                                    </button>
+                                @else
+                                    <button class="btn btn-sm w-100 mt-3 fw-bold" style="background-color: #444; color: #999; border: none; padding: 8px; cursor: not-allowed;" disabled>
+                                        Sold Out
+                                    </button>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -714,7 +734,79 @@
     </div>
 </section><!-- /Contact Section -->
 
+@foreach ($categories as $category)
+    @foreach ($category->items as $item)
+        @if ($item->is_available)
+            <div class="modal fade" id="modalCart-{{ Str::slug($category->name) }}-{{ $item->id }}" tabindex="-1" aria-labelledby="modalLabel-{{ Str::slug($category->name) }}-{{ $item->id }}" aria-hidden="true" style="z-index: 99999999;">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content bg-dark text-light" style="border: 1px solid #444;">
+                        <div class="modal-header border-secondary">
+                            <h5 class="modal-title" id="modalLabel-{{ Str::slug($category->name) }}-{{ $item->id }}" style="color: #a0845a;">
+                                Pesan {{ $item->name }}
+                            </h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        
+                        <form action="{{ route('cart.add', $item->id) }}" method="POST">
+                            @csrf
+                            <div class="modal-body text-center">
+                                <img src="{{ asset('storage/' . $item->image_url) }}" alt="{{ $item->name }}" class="img-fluid rounded mb-3 shadow" style="height: 150px; object-fit: cover; width: 100%;">
+                                
+                                <h4 class="mb-3">Rp{{ number_format($item->price, 0, ',', '.') }}</h4>
+                                
+                                <div class="d-flex justify-content-center align-items-center mb-2">
+                                    <label for="quantity" class="me-3 fw-bold">Jumlah:</label>
+                                    <input type="number" name="quantity" class="form-control text-center bg-dark text-light border-secondary" value="1" min="1" max="50" style="width: 80px;" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer border-secondary justify-content-center">
+                                <button type="submit" class="btn fw-bold px-4" style="background-color: #a0845a; color: #ffffff;">
+                                    Masukkan Keranjang 🛒
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @endif
+    @endforeach
+@endforeach
 
+@foreach ($featuredItems as $item)
+    @if ($item->is_available)
+        <div class="modal fade" id="modalCart-special-{{ $item->id }}" tabindex="-1" aria-labelledby="modalLabel-special-{{ $item->id }}" aria-hidden="true" style="z-index: 99999999;">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content bg-dark text-light" style="border: 1px solid #444;">
+                    <div class="modal-header border-secondary">
+                        <h5 class="modal-title" id="modalLabel-special-{{ $item->id }}" style="color: #a0845a;">
+                            Pesan {{ $item->name }} (Special)
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    
+                    <form action="{{ route('cart.add', $item->id) }}" method="POST">
+                        @csrf
+                        <div class="modal-body text-center">
+                            <img src="{{ asset('storage/' . $item->image_url) }}" alt="{{ $item->name }}" class="img-fluid rounded mb-3 shadow" style="height: 150px; object-fit: cover; width: 100%;">
+                            
+                            <h4 class="mb-3">Rp{{ number_format($item->price, 0, ',', '.') }}</h4>
+                            
+                            <div class="d-flex justify-content-center align-items-center mb-2">
+                                <label for="quantity" class="me-3 fw-bold">Jumlah:</label>
+                                <input type="number" name="quantity" class="form-control text-center bg-dark text-light border-secondary" value="1" min="1" max="50" style="width: 80px;" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer border-secondary justify-content-center">
+                            <button type="submit" class="btn fw-bold px-4" style="background-color: #a0845a; color: #ffffff;">
+                                Masukkan Keranjang 🛒
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endif
+@endforeach
 
 
 @endsection
