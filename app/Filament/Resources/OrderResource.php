@@ -41,12 +41,21 @@ class OrderResource extends Resource
                         'menunggu' => 'Menunggu (Baru)',
                         'dimasak' => 'Sedang Dimasak',
                         'disajikan' => 'Telah Disajikan',
-                        'selesai' => 'Selesai / Sudah Bayar',
+                        'selesai' => 'Selesai',
                         'dibatalkan' => 'Dibatalkan',
                     ])
                     ->required()
                     ->default('menunggu')
                     ->label('Status Pesanan'),
+
+                Select::make('payment_status')
+                ->label('Status Pembayaran')
+                ->options([
+                    'unpaid' => 'Belum Bayar',
+                    'paid' => 'Lunas',
+                    'failed' => 'Gagal',
+                ])
+                ->required(),
 
                 // Blok Bawah: Daftar Menu yang Dipesan (REPEATER)
                 Repeater::make('orderItems') // Nama relasi yang kita buat di Model Order
@@ -124,6 +133,24 @@ class OrderResource extends Resource
                     'dibatalkan' => 'gray',   // Abu-abu: Batal
                     default => 'primary',
                 }),
+            
+            TextColumn::make('payment_status')
+                ->label('Status Bayar')
+                ->badge()
+                ->color(fn (string $state): string => match ($state) {
+                    'paid' => 'success',    // Warna Hijau
+                    'unpaid' => 'danger',   // Warna Merah
+                    'failed' => 'warning',  // Warna Kuning (opsional kalau ada transaksi gagal)
+                    default => 'gray',
+                })
+                ->formatStateUsing(fn (string $state): string => match ($state) {
+                    'paid' => 'Lunas',
+                    'unpaid' => 'Belum Bayar',
+                    'failed' => 'Gagal',
+                    default => $state,
+                })
+                ->sortable()
+                ->searchable(),
 
             TextColumn::make('created_at')
                 ->label('Waktu Pesan')

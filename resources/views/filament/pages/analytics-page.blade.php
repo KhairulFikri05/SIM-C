@@ -1,4 +1,7 @@
 <x-filament-panels::page>
+    {{-- Refresh halaman secara diam-diam tiap 10 detik --}}
+    <div wire:poll.10s>
+        {{-- Period Selector --}}
 
     {{-- Period Selector --}}
     <div class="inline-flex rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 p-1 gap-1 mb-6">
@@ -278,8 +281,18 @@
                 }
             }
 
-            // Livewire selesai update DOM → baca data terbaru → render ulang chart
-            document.addEventListener('livewire:updated', () => setTimeout(initCharts, 150));
+            window.addEventListener('periodUpdated', () => {
+                // Beri jeda sedikit agar Livewire selesai update DOM (Hidden Div)
+                setTimeout(initCharts, 150);
+            });
+
+            // Opsional: Jika ingin grafiknya me-render ulang otomatis tiap kali halaman di-refresh oleh wire:poll
+            document.addEventListener('livewire:initialized', () => {
+                Livewire.hook('morph.updated', ({ component, el }) => {
+                    // Render ulang chart jika ada pembaruan DOM dari backend
+                    setTimeout(initCharts, 150);
+                });
+            });
         </script>
     </div>
 

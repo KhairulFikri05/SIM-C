@@ -116,15 +116,13 @@ class AnalyticsPage extends Page
     {
         $start = $this->getStartDate();
 
-        $orderIds = Order::where('status', 'selesai')
-            ->where('created_at', '>=', $start)
-            ->pluck('id');
+        // Pastikan status yang dicari sesuai kesepakatan ('paid')
+        $query = Order::where('payment_status', 'paid')
+                    ->where('created_at', '>=', $start);
 
-        $total = OrderItem::whereIn('order_id', $orderIds)
-            ->selectRaw('SUM(price * quantity) as total')
-            ->value('total') ?? 0;
-
-        $count = $orderIds->count();
+        // Langsung jumlahkan dari kolom total_price di tabel orders
+        $total = $query->sum('total_price');
+        $count = $query->count();
         $avg   = $count > 0 ? $total / $count : 0;
 
         return [
@@ -144,9 +142,11 @@ class AnalyticsPage extends Page
                 DB::raw('SUM(price * quantity) as total_revenue')
             )
             ->whereHas('order', function ($q) use ($start) {
-                $q->where('status', 'selesai')->where('created_at', '>=', $start);
+                // UBAH DI SINI: Sesuaikan dengan payment_status = paid
+                $q->where('payment_status', 'paid')
+                ->where('created_at', '>=', $start);
             })
-            ->with('menuItem:id,name')
+            ->with('menuItem:id,name') // Pastikan relasi 'menuItem' ada di model OrderItem
             ->groupBy('menu_item_id')
             ->orderByDesc('total_qty')
             ->limit(5)
@@ -161,7 +161,7 @@ class AnalyticsPage extends Page
                 DB::raw('HOUR(created_at) as hour'),
                 DB::raw('COUNT(*) as total_orders')
             )
-            ->where('status', 'selesai')
+            ->where('payment_status', 'paid')
             ->where('created_at', '>=', $start)
             ->groupBy('hour')
             ->orderBy('hour')
@@ -174,24 +174,22 @@ class AnalyticsPage extends Page
 
         if ($this->period === 'today') {
             return Order::select(
-                    DB::raw('HOUR(orders.created_at) as label'),
-                    DB::raw('SUM(order_items.price * order_items.quantity) as total')
+                    DB::raw('HOUR(created_at) as label'),
+                    DB::raw('SUM(total_price) as total') // Langsung ambil total_price
                 )
-                ->join('order_items', 'orders.id', '=', 'order_items.order_id')
-                ->where('orders.status', 'selesai')
-                ->where('orders.created_at', '>=', $start)
+                ->where('payment_status', 'paid')
+                ->where('created_at', '>=', $start)
                 ->groupBy('label')
                 ->orderBy('label')
                 ->get();
         }
 
         return Order::select(
-                DB::raw('DATE(orders.created_at) as label'),
-                DB::raw('SUM(order_items.price * order_items.quantity) as total')
+                DB::raw('DATE(created_at) as label'),
+                DB::raw('SUM(total_price) as total') // Langsung ambil total_price
             )
-            ->join('order_items', 'orders.id', '=', 'order_items.order_id')
-            ->where('orders.status', 'selesai')
-            ->where('orders.created_at', '>=', $start)
+            ->where('payment_status', 'paid')
+            ->where('created_at', '>=', $start)
             ->groupBy('label')
             ->orderBy('label')
             ->get();

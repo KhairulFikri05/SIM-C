@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\MenuItem;
 use App\Models\Order;
+use App\Models\OrderItem;
 
 class CartController extends Controller
 {
@@ -63,6 +64,15 @@ class CartController extends Controller
             'payment_status' => 'unpaid',
             'table_id' => $request->table_id ?? 1, // Pastikan ada input nomor meja
         ]);
+
+        foreach (session('cart') as $menuId => $details) {
+            OrderItem::create([
+                'order_id' => $order->id,
+                'menu_item_id' => $menuId,
+                'quantity' => $details['quantity'],
+                'price' => $details['price'],
+            ]);
+        }
 
         // 3. Kosongkan keranjang setelah order dibuat
         session()->forget('cart');
