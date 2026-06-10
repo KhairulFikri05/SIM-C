@@ -2,7 +2,7 @@
 
 Aplikasi manajemen cafe berbasis web yang dirancang untuk membantu pengelolaan operasional cafe secara efisien dan terintegrasi. Dibangun dengan **Laravel 12** dan **Filament Admin v3**.
 
-Sistem ini mencakup reservasi meja online, pengelolaan pesanan & transaksi kasir, menu digital via QR Code, serta laporan analitik bagi pemilik cafe untuk memantau performa bisnis
+Sistem ini mencakup reservasi meja online, pengelolaan pesanan & transaksi kasir, menu digital via QR Code, serta laporan analitik bagi pemilik cafe untuk memantau performa bisnis.
 
 ---
 
